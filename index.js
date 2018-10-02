@@ -1,36 +1,176 @@
-import React, { Component, Children } from "react";
-import PropTypes from "prop-types";
+"use strict";
 
-// Shamelessly stolen HOC template appropriated for gun
-export class GunProvider extends Component {
-    static propTypes = {
-        gun: PropTypes.object.isRequired
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.withGun = exports.GunProvider = undefined;
+
+var _extends =
+    Object.assign ||
+    function(target) {
+        for (var i = 1; i < arguments.length; i++) {
+            var source = arguments[i];
+            for (var key in source) {
+                if (Object.prototype.hasOwnProperty.call(source, key)) {
+                    target[key] = source[key];
+                }
+            }
+        }
+        return target;
     };
-    // you must specify what you’re adding to the context
-    static childContextTypes = {
-        gun: PropTypes.object.isRequired
-    };
-    getChildContext() {
-        const { gun } = this.props;
-        return { gun };
+
+var _createClass = (function() {
+    function defineProperties(target, props) {
+        for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor) descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+        }
     }
-    render() {
-        // `Children.only` enables us not to add a <div /> for nothing
-        return Children.only(this.props.children);
+    return function(Constructor, protoProps, staticProps) {
+        if (protoProps) defineProperties(Constructor.prototype, protoProps);
+        if (staticProps) defineProperties(Constructor, staticProps);
+        return Constructor;
+    };
+})();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = require("prop-types");
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+function _interopRequireDefault(obj) {
+    return obj && obj.__esModule ? obj : { default: obj };
+}
+
+function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+        throw new TypeError("Cannot call a class as a function");
     }
 }
 
-export const withGun = ComponentToWrap => {
-    return class GunComponent extends Component {
-        // let’s define what’s needed from the `context`
-        static contextTypes = {
-            gun: PropTypes.object.isRequired
-        };
-        render() {
-            const { gun } = this.context;
-            // what we do is basically rendering `ComponentToWrap`
-            // with an added `theme` prop, like a hook
-            return <ComponentToWrap {...this.props} gun={gun} />;
+function _possibleConstructorReturn(self, call) {
+    if (!self) {
+        throw new ReferenceError(
+            "this hasn't been initialised - super() hasn't been called"
+        );
+    }
+    return call && (typeof call === "object" || typeof call === "function")
+        ? call
+        : self;
+}
+
+function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+        throw new TypeError(
+            "Super expression must either be null or a function, not " +
+                typeof superClass
+        );
+    }
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+        constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
         }
-    };
+    });
+    if (superClass)
+        Object.setPrototypeOf
+            ? Object.setPrototypeOf(subClass, superClass)
+            : (subClass.__proto__ = superClass);
+}
+
+// Shamelessly stolen HOC template appropriated for gun
+var GunProvider = (exports.GunProvider = (function(_Component) {
+    _inherits(GunProvider, _Component);
+
+    function GunProvider() {
+        _classCallCheck(this, GunProvider);
+
+        return _possibleConstructorReturn(
+            this,
+            (GunProvider.__proto__ || Object.getPrototypeOf(GunProvider)).apply(
+                this,
+                arguments
+            )
+        );
+    }
+
+    _createClass(GunProvider, [
+        {
+            key: "getChildContext",
+            value: function getChildContext() {
+                var gun = this.props.gun;
+
+                return { gun: gun };
+            }
+            // you must specify what you’re adding to the context
+        },
+        {
+            key: "render",
+            value: function render() {
+                // `Children.only` enables us not to add a <div /> for nothing
+                return _react.Children.only(this.props.children);
+            }
+        }
+    ]);
+
+    return GunProvider;
+})(_react.Component));
+
+GunProvider.propTypes = {
+    gun: _propTypes2.default.object.isRequired
 };
+GunProvider.childContextTypes = {
+    gun: _propTypes2.default.object.isRequired
+};
+var withGun = (exports.withGun = function withGun(ComponentToWrap) {
+    var _class, _temp;
+
+    return (
+        (_temp = _class = (function(_Component2) {
+            _inherits(GunComponent, _Component2);
+
+            function GunComponent() {
+                _classCallCheck(this, GunComponent);
+
+                return _possibleConstructorReturn(
+                    this,
+                    (
+                        GunComponent.__proto__ ||
+                        Object.getPrototypeOf(GunComponent)
+                    ).apply(this, arguments)
+                );
+            }
+
+            _createClass(GunComponent, [
+                {
+                    key: "render",
+                    value: function render() {
+                        var gun = this.context.gun;
+                        // what we do is basically rendering `ComponentToWrap`
+                        // with an added `theme` prop, like a hook
+
+                        return _react2.default.createElement(
+                            ComponentToWrap,
+                            _extends({}, this.props, { gun: gun })
+                        );
+                    }
+                    // let’s define what’s needed from the `context`
+                }
+            ]);
+
+            return GunComponent;
+        })(_react.Component)),
+        (_class.contextTypes = {
+            gun: _propTypes2.default.object.isRequired
+        }),
+        _temp
+    );
+});

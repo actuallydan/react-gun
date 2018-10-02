@@ -1,12 +1,12 @@
 {
-  "name": "react-gun",
-  "version": "1.0.1",
-  "description": "Simple Higher-Order Component for GunDB in React",
-  "main": "index.js",
-  "author": "Dan Kral",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {
-    "prop-types": "^15.6.2"
-  }
+    "name": "react-gun",
+    "version": "1.0.3",
+    "description": "Simple Higher-Order Component for GunDB in React",
+    "main": "index.js",
+    "author": "Dan Kral",
+    "license": "MIT",
+    "private": false,
+    "dependencies": {
+        "prop-types": "^15.6.2"
+    }
 }
