@@ -52,7 +52,7 @@ class ComponentThatUsesGun extends Component {
         });
     }
     render() {
-        if (this.state.foo) {
+        if (!this.state.foo) {
             return <div>Loading...</div>;
         }
         return <div>{this.state.foo}</div>;
