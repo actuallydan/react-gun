@@ -1,6 +1,6 @@
 {
     "name": "react-gun",
-    "version": "1.0.3",
+    "version": "1.0.10",
     "description": "Simple Higher-Order Component for GunDB in React",
     "main": "index.js",
     "author": "Dan Kral",

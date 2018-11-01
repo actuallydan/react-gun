@@ -5,15 +5,19 @@ import PropTypes from "prop-types";
 // Shamelessly stolen HOC template appropriated for gun
 export class GunProvider extends Component {
     static propTypes = {
-        gun: PropTypes.object.isRequired
+        gun: PropTypes.object.isRequired,
+        GUN: PropTypes.func,
+        SEA: PropTypes.func
     };
     // you must specify what you’re adding to the context
     static childContextTypes = {
-        gun: PropTypes.object.isRequired
+        gun: PropTypes.object.isRequired,
+        GUN: PropTypes.func,
+        SEA: PropTypes.func
     };
     getChildContext() {
-        const { gun } = this.props;
-        return { gun };
+        const { gun, GUN, SEA } = this.props;
+        return { gun, GUN, SEA };
     }
     render() {
         // `Children.only` enables us not to add a <div /> for nothing
@@ -25,13 +29,15 @@ export const withGun = ComponentToWrap => {
     return class GunComponent extends Component {
         // let’s define what’s needed from the `context`
         static contextTypes = {
-            gun: PropTypes.object.isRequired
+            gun: PropTypes.object.isRequired,
+            GUN: PropTypes.func,
+            SEA: PropTypes.func
         };
         render() {
-            const { gun } = this.context;
+            const { gun, GUN, SEA } = this.context;
             // what we do is basically rendering `ComponentToWrap`
             // with an added `theme` prop, like a hook
-            return <ComponentToWrap {...this.props} gun={gun} />;
+            return <ComponentToWrap {...this.props} gun={gun} GUN={GUN} SEA={SEA}/>;
         }
     };
 };
