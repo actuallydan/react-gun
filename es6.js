@@ -1,19 +1,19 @@
 // Uncluttered and edit friendly es6 version before getting compiled to play nice with npm
-import React, { Component, Children } from "react";
-import PropTypes from "prop-types";
+import React, { Component, Children } from 'react';
+import PropTypes from 'prop-types';
 
 // Shamelessly stolen HOC template appropriated for gun
 export class GunProvider extends Component {
     static propTypes = {
         gun: PropTypes.object.isRequired,
         GUN: PropTypes.func,
-        SEA: PropTypes.func
+        SEA: PropTypes.object
     };
     // you must specify what you’re adding to the context
     static childContextTypes = {
         gun: PropTypes.object.isRequired,
         GUN: PropTypes.func,
-        SEA: PropTypes.func
+        SEA: PropTypes.object
     };
     getChildContext() {
         const { gun, GUN, SEA } = this.props;
@@ -31,14 +31,20 @@ export const withGun = ComponentToWrap => {
         static contextTypes = {
             gun: PropTypes.object.isRequired,
             GUN: PropTypes.func,
-            SEA: PropTypes.func
+            SEA: PropTypes.object
         };
         render() {
             const { gun, GUN, SEA } = this.context;
             // what we do is basically rendering `ComponentToWrap`
             // with an added `theme` prop, like a hook
-            return <ComponentToWrap {...this.props} gun={gun} GUN={GUN} SEA={SEA}/>;
+            return (
+                <ComponentToWrap
+                    {...this.props}
+                    gun={gun}
+                    GUN={GUN}
+                    SEA={SEA}
+                />
+            );
         }
     };
 };
-
